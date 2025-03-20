@@ -19,5 +19,6 @@ RUN . /opt/ros/humble/setup.sh && colcon build --packages-select spinnaker_test_
 CMD ["/bin/bash", "-c", \
      "source /opt/ros/humble/setup.bash && \
       source /test_ws/install/setup.bash && \
+      export HARDWARE_CONNECTED=false && \
       colcon test --packages-select spinnaker_test_pkg && \
       colcon test-result --verbose"]
