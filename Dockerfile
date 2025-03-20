@@ -5,6 +5,7 @@ FROM ros:humble
 RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
+    wget \    
     ros-humble-std-msgs \
     ros-humble-camera-info-manager \ 
     libpcl-dev \
@@ -22,7 +23,8 @@ COPY ./src /workspace/src
 
 # Build the workspace using colcon
 RUN . /opt/ros/humble/setup.sh && \
-    colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+    colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_EXPORT_COMPILE_COMMANDS=ON --verbose --event-handlers console_cohesion+
+    #colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
 # Source the workspace setup script by default
 RUN echo 'source /workspace/install/setup.bash' >> /root/.bashrc
