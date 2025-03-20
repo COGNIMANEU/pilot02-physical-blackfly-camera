@@ -32,6 +32,21 @@ jobs:
         chmod +x /usr/local/bin/docker-compose
         docker-compose --version  # Verify installation
 
+    - name: Install Spinnaker SDK
+      run: |
+        # Install Spinnaker SDK
+        echo "Installing Spinnaker SDK..."
+        curl -LO https://spinnaker.osdk.downloads/spinnaker_sdk_linux_amd64.tar.gz
+        tar -xvzf spinnaker_sdk_linux_amd64.tar.gz -C /opt/
+        rm spinnaker_sdk_linux_amd64.tar.gz
+        echo "Spinnaker SDK installed to /opt/spinnaker"    
+
+    - name: Check Spinnaker Installation
+      run: |
+        echo "Checking Spinnaker installation"
+        ls -l /opt/spinnaker
+        echo $SPINNAKER_DIR
+
     # 4. Build the Docker image
     - name: Build the Docker image
       run: |
