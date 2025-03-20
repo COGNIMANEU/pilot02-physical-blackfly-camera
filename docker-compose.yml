@@ -1,0 +1,22 @@
+services:
+  camera_driver:
+    build:
+      context: ./
+    container_name: camera_driver
+    networks:
+      - camera_net
+    environment:
+      - LAUNCH_FILE=master_example.launch.py  
+      - ENV CAMERAMODULE=spinnaker_synchronized_camera_driver
+
+  test_runner:
+    build:
+      context: ./test
+    depends_on:
+      - camera_driver
+    networks:
+      - camera_net
+
+networks:
+  camera_net:
+    driver: bridge      
