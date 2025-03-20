@@ -32,16 +32,15 @@ jobs:
         chmod +x /usr/local/bin/docker-compose
         docker-compose --version  # Verify installation
 
+    - name: Set up environment variables for Spinnaker
+      run: |
+        echo "SPINNAKER_LIBRARIES=${GITHUB_WORKSPACE}/opt/spinnaker/lib" >> $GITHUB_ENV
+        echo "SPINNAKER_INCLUDE_DIRS=${GITHUB_WORKSPACE}/opt/spinnaker/include" >> $GITHUB_ENV
+
     # 4. Build the Docker image
     - name: Build the Docker image
       run: |
         docker build . --file Dockerfile --tag spinnaker_synchronized_camera_driver_image:latest
-
-    - name: Check Spinnaker Installation
-      run: |
-        echo "Checking Spinnaker installation"
-        ls -l /opt/spinnaker
-        echo $SPINNAKER_DIR
 
     # 5. Run the tests (assumes Docker Compose is used for integration tests)
     - name: Run the tests using docker-compose
@@ -52,10 +51,10 @@ jobs:
         CAMERAMODULE: spinnaker_synchronized_camera_driver
 
     # 6. Ensure lowercase repository name
-    - name: Ensure lowercase repository name
-      run: |
-        REPO_NAME=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
-        echo "REPO_NAME=$REPO_NAME" >> $GITHUB_ENV
+    #- name: Ensure lowercase repository name
+    #  run: |
+    #    REPO_NAME=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
+    #    echo "REPO_NAME=$REPO_NAME" >> $GITHUB_ENV
 
     # 7. Upload Docker image to GitHub Container Registry
     #- name: Upload Docker image to GitHub Container Registry
