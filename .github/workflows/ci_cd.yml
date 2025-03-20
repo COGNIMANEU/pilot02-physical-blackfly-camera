@@ -42,8 +42,8 @@ jobs:
       run: |
         docker-compose -f docker-compose.yml up --abort-on-container-exit --exit-code-from test_runner
       env:
-        LAUNCH_FILE=master_example.launch.py  
-        ENV CAMERAMODULE=spinnaker_synchronized_camera_driver
+        LAUNCH_FILE: master_example.launch.py
+        CAMERAMODULE: spinnaker_synchronized_camera_driver
 
     # 6. Ensure lowercase repository name
     - name: Ensure lowercase repository name
