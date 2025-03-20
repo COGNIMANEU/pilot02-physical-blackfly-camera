@@ -23,7 +23,7 @@ COPY ./src /workspace/src
 
 # Build the workspace using colcon
 RUN . /opt/ros/humble/setup.sh && \
-    colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_EXPORT_COMPILE_COMMANDS=ON --verbose --event-handlers console_cohesion+
+    colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_EXPORT_COMPILE_COMMANDS=ON --log-level DEBUG
     #colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
 # Source the workspace setup script by default
