@@ -32,11 +32,6 @@ jobs:
         chmod +x /usr/local/bin/docker-compose
         docker-compose --version  # Verify installation
 
-    - name: Set up environment variables for Spinnaker
-      run: |
-        echo "SPINNAKER_LIBRARIES=${GITHUB_WORKSPACE}/opt/spinnaker/lib" >> $GITHUB_ENV
-        echo "SPINNAKER_INCLUDE_DIRS=${GITHUB_WORKSPACE}/opt/spinnaker/include" >> $GITHUB_ENV
-
     # 4. Build the Docker image
     - name: Build the Docker image
       run: |
