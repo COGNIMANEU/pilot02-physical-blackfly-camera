@@ -16,6 +16,8 @@ services:
       - camera_driver
     networks:
       - camera_net
+    environment:
+      - HARDWARE_CONNECTED=false
 
 networks:
   camera_net:

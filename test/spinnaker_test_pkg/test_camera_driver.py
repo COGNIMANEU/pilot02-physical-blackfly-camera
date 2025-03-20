@@ -33,10 +33,10 @@ class ImageTestNode(Node):
         received[cam] = True
         self.get_logger().info(f'✅ Camera image received from {cam}!')
 
-@pytest.mark.ros2
 def test_image_stream_from_both_cameras():
     global received
 
+    print(f"Hardware connected: {hardware_connected}")
     if not hardware_connected:
         # If no hardware is connected, skip the test but do not mark it as a failure
         print("⚠️ No hardware detected. Skipping hardware-dependent test.")
