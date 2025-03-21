@@ -16,10 +16,17 @@ RUN apt-get update && apt-get install -y \
     ros-humble-ament-cmake-clang-format \  
     && rm -rf /var/lib/apt/lists/*
 
+# Set environment variables 
+ENV LAUNCH_FILE=master_example.launch.py  
+ENV CAMERAMODULE=spinnaker_synchronized_camera_driver
 
 # Create a workspace and copy the source code into the container
 WORKDIR /workspace
 COPY ./src /workspace/src
+
+# Copy config and launch folders from the host to the container (ensure these paths exist on the host)
+COPY ./config /workspace/src/
+COPY ./launch /workspace/src/
 
 # Build the workspace using colcon
 RUN . /opt/ros/humble/setup.sh && \
@@ -27,14 +34,6 @@ RUN . /opt/ros/humble/setup.sh && \
 
 # Source the workspace setup script by default
 RUN echo 'source /workspace/install/setup.bash' >> /root/.bashrc
-
-# Set environment variables 
-ENV LAUNCH_FILE=master_example.launch.py  
-ENV CAMERAMODULE=spinnaker_synchronized_camera_driver
-
-# Copy config and launch folders from the host to the container (ensure these paths exist on the host)
-COPY ./config /workspace/src/
-COPY ./launch /workspace/src/
 
 # Default command to source the workspace and run a specified launch file
 ENTRYPOINT ["/bin/bash", "-c", "source /opt/ros/humble/setup.bash && source /workspace/install/setup.bash && ros2 launch $CAMERAMODULE $LAUNCH_FILE"]
