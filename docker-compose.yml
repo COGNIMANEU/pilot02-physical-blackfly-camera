@@ -6,7 +6,7 @@ services:
     networks:
       - camera_net
     environment:
-      - LAUNCH_FILE=master_example.launch.py  
+      - LAUNCH_FILE=multiple_cameras.launch.py  
       - ENV CAMERAMODULE=spinnaker_synchronized_camera_driver
 
   test_runner:

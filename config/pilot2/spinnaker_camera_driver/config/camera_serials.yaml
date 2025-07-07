@@ -1,0 +1,14 @@
+cam_0:
+  name: cam_0
+  type: blackfly_s
+  serial: '24252439'
+
+cam_1:
+  name: cam_1
+  type: blackfly_s
+  serial: '24252438'
+
+cam_2:
+  name: cam_2
+  type: blackfly_s
+  serial: '24130017'
